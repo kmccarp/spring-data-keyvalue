@@ -118,8 +118,8 @@ public class QuerydslKeyValuePredicateExecutor<T> implements ListQuerydslPredica
 
 		try {
 			return Optional.ofNullable(prepareQuery(predicate).fetchOne());
-		} catch (NonUniqueResultException o_O) {
-			throw new IncorrectResultSizeDataAccessException("Expected one or no result but found more than one", 1, o_O);
+		} catch (NonUniqueResultException oO) {
+			throw new IncorrectResultSizeDataAccessException("Expected one or no result but found more than one", 1, oO);
 		}
 	}
 
