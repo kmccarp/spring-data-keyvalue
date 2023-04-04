@@ -39,7 +39,7 @@ class KeyValueRepositoryFactoryBeanUnitTests {
 
 	@BeforeEach
 	void setUp() {
-		this.factoryBean = new KeyValueRepositoryFactoryBean<Repository<Object, Object>, Object, Object>(
+		this.factoryBean = new KeyValueRepositoryFactoryBean<>(
 				SampleRepository.class);
 	}
 
@@ -55,7 +55,7 @@ class KeyValueRepositoryFactoryBeanUnitTests {
 
 	@Test // DATAKV-123
 	void rejectsUninitializedInstance() {
-		assertThatIllegalArgumentException().isThrownBy(() -> factoryBean.afterPropertiesSet());
+		assertThatIllegalArgumentException().isThrownBy(factoryBean::afterPropertiesSet);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -67,14 +67,14 @@ class KeyValueRepositoryFactoryBeanUnitTests {
 
 		factoryBean.setQueryCreator(creatorType);
 
-		assertThatIllegalArgumentException().isThrownBy(() -> factoryBean.afterPropertiesSet());
+		assertThatIllegalArgumentException().isThrownBy(factoryBean::afterPropertiesSet);
 	}
 
 	@Test // DATAKV-123
 	void rejectsInstanceWithoutQueryCreator() {
 
 		factoryBean.setKeyValueOperations(mock(KeyValueOperations.class));
-		assertThatIllegalArgumentException().isThrownBy(() -> factoryBean.afterPropertiesSet());
+		assertThatIllegalArgumentException().isThrownBy(factoryBean::afterPropertiesSet);
 	}
 
 	@Test // DATAKV-123
